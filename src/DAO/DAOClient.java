@@ -60,7 +60,7 @@ public class DAOClient extends Idao<Client>{
 				res="0";*/
 		}
 		catch (Exception e){
-			res=e.toString();
+			res="-111";
 		}
 		return res;
 	}

@@ -32,12 +32,12 @@ public class REST_Utilisateur {
 		if(client!=null)
 			return Response.status(Status.OK).entity(client).build();
 		else
-			return Response.status(Status.OK).entity("AAA").build();
+			return Response.status(Status.OK).build();
 			
 	}
 	
 	@POST
-	@Consumes("application/x-www-form-urlencoded")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createClient(@FormParam("nom") String nom,
 								 @FormParam("prenom") String prenom,
