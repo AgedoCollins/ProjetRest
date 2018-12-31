@@ -23,14 +23,16 @@ public class DAOClient extends Idao<Client>{
 			call.execute();
 			ResultSet  result = (ResultSet)call.getObject(3);
 			while (result.next()){
-				client = new Client();
-				client.setId(result.getInt("ID_UTILISATEUR"));
-				client.setNom(result.getString("NOM"));
-				client.setPrenom(result.getString("PRENOM"));
-				client.setDateNaissance(result.getString("DATENAISSANCE"));
-				client.setTelephone(result.getString("TELEPHONE"));
-				client.setEmail(email);
-				client.setPassword(password);			
+				if (result.getString("TYPE_UTILISATEUR").equals("client")) {
+					client = new Client();
+					client.setId(result.getInt("ID_UTILISATEUR"));
+					client.setNom(result.getString("NOM"));
+					client.setPrenom(result.getString("PRENOM"));
+					client.setDateNaissance(result.getString("DATENAISSANCE"));
+					client.setTelephone(result.getString("TELEPHONE"));
+					client.setEmail(email);
+					client.setPassword(password);			
+				}
 			}
 		}
 		catch (Exception e){

@@ -2,6 +2,12 @@ package Bean;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "article")
+@XmlType(propOrder = { "libelle", "prix", "descriptif", "nomImage"})
 public class Article {
 	private int id;
 	private String libelle;
@@ -13,6 +19,14 @@ public class Article {
 
 	}
 
+	public Article(int id, String libelle, double prix, String descriptif, String nomImage) {
+		this.id=id;
+		this.libelle = libelle;
+		this.prix = prix;
+		this.descriptif = descriptif;
+		this.nomImage = nomImage;
+	}
+	
 	public Article(String libelle, double prix, String descriptif, String nomImage) {
 		this.libelle = libelle;
 		this.prix = prix;
@@ -20,6 +34,7 @@ public class Article {
 		this.nomImage = nomImage;
 	}
 
+	@XmlAttribute(name = "id")
 	public int getId() {
 		return id;
 	}
@@ -28,6 +43,7 @@ public class Article {
 		this.id = id;
 	}
 
+	@XmlAttribute(name = "libelle")
 	public String getLibelle() {
 		return libelle;
 	}
@@ -36,6 +52,7 @@ public class Article {
 		this.libelle = libelle;
 	}
 
+	@XmlAttribute(name = "prix")
 	public double getPrix() {
 		return prix;
 	}
@@ -44,6 +61,7 @@ public class Article {
 		this.prix = prix;
 	}
 
+	@XmlAttribute(name = "descriptif")
 	public String getDescriptif() {
 		return descriptif;
 	}
@@ -52,6 +70,7 @@ public class Article {
 		this.descriptif = descriptif;
 	}
 
+	@XmlAttribute(name = "nomimage")
 	public String getNomImage() {
 		return nomImage;
 	}
@@ -85,7 +104,7 @@ public class Article {
 
 	public static String toJson(List<Article> list) {
 		String retour = "{";
-		retour += "\"articles\":";
+		retour += "\"article\":";
 		retour += "[";
 		int cpt = 0;
 		for (Article art : list) {
