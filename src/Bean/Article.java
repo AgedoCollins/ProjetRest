@@ -70,54 +70,13 @@ public class Article {
 		this.descriptif = descriptif;
 	}
 
-	@XmlAttribute(name = "nomimage")
+	@XmlAttribute(name = "nomImage")
 	public String getNomImage() {
 		return nomImage;
 	}
 
 	public void setNomImage(String nomImage) {
 		this.nomImage = nomImage;
-	}
-
-	public String toJson() {
-		String retour = "";
-		retour += "{";
-
-		retour += "\"id\":";
-		retour += "\"" + this.getId() + "\"";
-		retour += ",";
-		retour += "\"libelle\":";
-		retour += "\"" + this.getLibelle() + "\"";
-		retour += ",";
-		retour += "\"prix\":";
-		retour += "\"" + this.getPrix() + "\"";
-		retour += ",";
-		retour += "\"descriptif\":";
-		retour += "\"" + this.getDescriptif() + "\"";
-		retour += ",";
-		retour += "\"nomImage\":";
-		retour += "\"" + this.getNomImage() + "\"";
-		retour += "}";
-
-		return retour;
-	}
-
-	public static String toJson(List<Article> list) {
-		String retour = "{";
-		retour += "\"article\":";
-		retour += "[";
-		int cpt = 0;
-		for (Article art : list) {
-			if (cpt > 0) {
-				retour += ",";
-			}
-			retour += art.toJson();
-			cpt++;
-		}
-
-		retour += "]";
-		retour += "}";
-		return retour;
 	}
 
 }

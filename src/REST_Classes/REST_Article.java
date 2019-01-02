@@ -24,8 +24,8 @@ import DAO.DAOFactory;
 public class REST_Article {
 	private DAOFactory daoFactory= null;
 	
-	/*@GET
-	@Path("{id}")
+	@GET
+	@Path("afficher/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getArticle(@PathParam("id") int id) {
 		daoFactory= new DAOFactory();
@@ -36,7 +36,7 @@ public class REST_Article {
 		else
 			return Response.status(Status.OK).entity("Aucun article trouvé.").build();		
 			
-	}*/
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
