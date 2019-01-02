@@ -14,23 +14,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import Bean.Client;
-import DAO.DAOClient;
+import Bean.Vendeur;
+import DAO.DAOVendeur;
 import DAO.DAOFactory;
-import DAO.DAOUtilisateur;
 
-@Path("utilisateurs")
-public class REST_Utilisateur {
+@Path("vendeurs")
+public class REST_Vendeur {
 	private DAOFactory daoFactory= null;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getClient(@QueryParam("email") String email,@QueryParam("password") String password) {
+	public Response getVendeur(@QueryParam("email") String email,@QueryParam("password") String password) {
 		daoFactory= new DAOFactory();
-		DAOClient daoClient = (DAOClient) daoFactory.getDaoClient();
-		Client client = daoClient.login(email, password);
-		if(client!=null)
-			return Response.status(Status.OK).entity(client).build();
+		DAOVendeur daoVendeur = (DAOVendeur) daoFactory.getDaoVendeur();
+		Vendeur vendeur = daoVendeur.login(email, password);
+		if(vendeur!=null)
+			return Response.status(Status.OK).entity(vendeur).build();
 		else
 			return Response.status(Status.OK).build();
 			
@@ -39,29 +38,29 @@ public class REST_Utilisateur {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createClient(@FormParam("nom") String nom,
+	public Response createVendeur(@FormParam("nom") String nom,
 								 @FormParam("prenom") String prenom,
 								 @FormParam("dateNaissance") String dateNaissance,
 								 @FormParam("telephone") String telephone,
 								 @FormParam("email") String email,
 								 @FormParam("password") String password){
 		daoFactory = new DAOFactory();
-		Client client = new Client();
-		client.setNom(nom);
-		client.setPrenom(prenom);
-		client.setDateNaissance(dateNaissance);
-		client.setTelephone(telephone);
-		client.setEmail(email);
-		client.setPassword(password);
-		DAOClient dao_client = (DAOClient) daoFactory.getDaoClient();
-		return Response.status(Status.OK).entity(dao_client.create(client)).build();
+		Vendeur vendeur = new Vendeur();
+		vendeur.setNom(nom);
+		vendeur.setPrenom(prenom);
+		vendeur.setDateNaissance(dateNaissance);
+		vendeur.setTelephone(telephone);
+		vendeur.setEmail(email);
+		vendeur.setPassword(password);
+		DAOVendeur daoVendeur = (DAOVendeur) daoFactory.getDaoVendeur();
+		return Response.status(Status.OK).entity(daoVendeur.create(vendeur)).build();
 	}
 	
 	
 	
 	@DELETE
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response deleteClient() {
+	public Response deleteVendeur() {
 		
 		return Response.status(Status.OK).entity("mmmmmmmmmmmmmmm").build();
 	}
