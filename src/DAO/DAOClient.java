@@ -3,6 +3,7 @@ package DAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import Bean.Client;
 import oracle.jdbc.OracleTypes;
@@ -66,6 +67,29 @@ public class DAOClient extends Idao<Client>{
 		}
 		return res;
 	}
+	
+	public boolean update(Client cli) {
+		
+		
+		String sql = "{call PKG_Utilisateur.updateUtilisateur(?,?,?,?,?,?,?)}"; 
+		CallableStatement call;
+		try {
+			call = connect.prepareCall(sql); 		
+			call.setInt(1, cli.getId());
+			call.setString(2, cli.getNom());
+			call.setString(3, cli.getPrenom());
+			call.setString(4, cli.getDateNaissance());
+			call.setString(5, cli.getTelephone());
+			call.setString(6, cli.getEmail());
+			call.setString(7, cli.getPassword());
+			call.execute();
+			return true;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		} 
+	}
 
 	@Override
 	public Client find(Client obj) {
@@ -75,12 +99,6 @@ public class DAOClient extends Idao<Client>{
 
 	@Override
 	public boolean delete(Client obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean update(Client obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

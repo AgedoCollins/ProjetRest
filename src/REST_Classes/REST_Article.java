@@ -34,7 +34,7 @@ public class REST_Article {
 		if(article!=null)
 			return Response.status(Status.OK).entity(article).build();
 		else
-			return Response.status(Status.OK).entity("Aucun article trouvé.").build();		
+			return Response.status(Status.OK).build();		
 			
 	}
 	
@@ -64,6 +64,20 @@ public class REST_Article {
 			return Response.status(Status.OK).entity(null).build();		
 			
 	}
+	
+/*	@GET
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getArticleByCommande(@PathParam("id") int id) {
+		daoFactory= new DAOFactory();
+		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
+		List<Article> listArticles = daoArticle.findByIdCommande(id);	
+		if(listArticles.size()>0)
+			return Response.status(Status.OK).entity(listArticles).build();
+		else
+			return Response.status(Status.OK).entity(null).build();		
+			
+	}*/
 	
 	@POST
 	@Consumes("application/x-www-form-urlencoded")

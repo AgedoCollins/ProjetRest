@@ -1,6 +1,7 @@
 package REST_Classes;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -57,6 +58,40 @@ public class REST_Client {
 		return Response.status(Status.OK).entity(dao_client.create(client)).build();
 	}
 	
+	@Path("Update")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response UpdateClient(
+			@FormParam("nom") String nom,
+			 @FormParam("prenom") String prenom,
+			 @FormParam("dateNaissance") String dateNaissance,
+			 @FormParam("telephone") String telephone,
+			 @FormParam("email") String email,
+			 @FormParam("password") String password,
+			 @FormParam("id")int id) throws SQLException{
+		
+		daoFactory= new DAOFactory();
+		DAOClient daoClient = (DAOClient) daoFactory.getDaoClient();
+		Client cli = new Client();
+		cli.setNom(nom);
+		cli.setPrenom(prenom);
+		cli.setDateNaissance(dateNaissance);
+		cli.setEmail(email);
+		cli.setPassword(password);
+		cli.setTelephone(telephone);
+		cli.setId(id);
+		boolean res = daoClient.update(cli);
+		if(res) {
+			return Response.status(Status.OK).build();
+		}
+		
+		else {
+			
+		}
+			return Response.status(Status.OK).entity("-1").build();
+			
+	}
 	
 	
 	@DELETE

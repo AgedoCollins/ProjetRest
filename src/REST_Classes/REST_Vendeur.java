@@ -1,6 +1,6 @@
 package REST_Classes;
 
-import java.sql.Date;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 
 import Bean.Vendeur;
 import DAO.DAOVendeur;
+
 import DAO.DAOFactory;
 
 @Path("vendeurs")
@@ -32,6 +33,20 @@ public class REST_Vendeur {
 			return Response.status(Status.OK).entity(vendeur).build();
 		else
 			return Response.status(Status.OK).build();
+			
+	}
+	
+	@GET
+	@Path("all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllVendeur() {
+		daoFactory= new DAOFactory();
+		DAOVendeur daoVendeur = (DAOVendeur) daoFactory.getDaoVendeur();
+		List<Vendeur> listVendeurs = daoVendeur.findAll();	
+		if(listVendeurs.size()>0)
+			return Response.status(Status.OK).entity(listVendeurs).build();
+		else
+			return Response.status(Status.OK).build();		
 			
 	}
 	

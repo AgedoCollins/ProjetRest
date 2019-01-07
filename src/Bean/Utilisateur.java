@@ -1,7 +1,5 @@
 package Bean;
 
-import java.sql.Date;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -100,35 +98,6 @@ public class Utilisateur {
 
 	public String getPassword() {
 		return this.password;
-	}
-
-	public String toJson() {
-		String retour = "";
-		retour += "{";
-
-		retour += "\"id\":";
-		retour += this.getId();
-		retour += ",";
-		retour += "\"nom\":";
-		retour += "\"" + this.getNom() + "\"";
-		retour += ",";
-		retour += "\"prenom\":";
-		retour += "\"" + this.getPrenom() + "\"";
-		retour += ",";
-		retour += "\"dateNaissance\":";
-		retour += "\"" + this.getDateNaissance() + "\"";
-		retour += ",";
-		retour += "\"telephone\":";
-		retour += "\"" + this.getTelephone() + "\"";
-		retour += ",";
-		retour += "\"email\":";
-		retour += "\"" + this.getEmail() + "\"";
-		retour += ",";
-		retour += "\"password\":";
-		retour += "\"" + this.getPassword() + "\"";
-		retour += "}";
-
-		return retour;
 	}
 
 	@Override

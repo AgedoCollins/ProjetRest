@@ -100,7 +100,33 @@ public class DAOVendeur extends Idao<Vendeur> {
 		}
 		return listArticles;
 	}
-	
+
+	public List<Vendeur> findAll() {
+		Vendeur vendeur = null;
+		List<Vendeur> listVendeurs = new ArrayList<Vendeur>();
+		try{
+			String sql = "{call PKG_UTILISATEUR.findAll(?)}"; 
+			CallableStatement call = connect.prepareCall(sql); 	
+			call.registerOutParameter(1, OracleTypes.CURSOR); 
+			call.execute();
+			ResultSet  result = (ResultSet)call.getObject(1);
+			while (result.next()){
+				vendeur = new Vendeur();
+				vendeur.setId(result.getInt("ID_UTILISATEUR"));
+				vendeur.setNom(result.getString("NOM"));
+				vendeur.setPrenom(result.getString("PRENOM"));
+				vendeur.setDateNaissance(result.getString("DATENAISSANCE"));	
+				vendeur.setTelephone(result.getString("TELEPHONE"));	
+				vendeur.setEmail(result.getString("EMAIL"));	
+				vendeur.setPassword(result.getString("PASS"));	
+				listVendeurs.add(vendeur);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();  
+		}
+		return listVendeurs;
+	}
 	@Override
 	public boolean delete(Vendeur obj) {
 		// TODO Auto-generated method stub
