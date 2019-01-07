@@ -1,10 +1,12 @@
 package REST_Classes;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import Bean.Article;
+import Bean.Client;
 import Bean.Commande;
 import DAO.DAOArticle;
 import DAO.DAOCommande;
@@ -46,6 +49,20 @@ public class REST_Commande {
 		daoFactory= new DAOFactory();
 		DAOCommande daoCommande = (DAOCommande) daoFactory.getDaoCommande();
 		List<Commande> listCommandes = daoCommande.findAll();
+		if(listCommandes.size()>0)
+			return Response.status(Status.OK).entity(listCommandes).build();
+		else
+			return Response.status(Status.OK).build();		
+			
+	}
+	
+	@GET
+	@Path("lastId")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommandeForLastId() {
+		daoFactory= new DAOFactory();
+		DAOCommande daoCommande = (DAOCommande) daoFactory.getDaoCommande();
+		List<Commande> listCommandes = daoCommande.findAllForLastId();
 		if(listCommandes.size()>0)
 			return Response.status(Status.OK).entity(listCommandes).build();
 		else
@@ -99,6 +116,40 @@ public class REST_Commande {
 		commande.setClient(client);
 		return Response.status(Status.OK).entity(dao_com.create(commande)).build();	
 	}*/
+	
+/*	@POST
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response PostCom(
+			@FormParam("dateCommande") String dateCommande,
+			@FormParam("etat") String etat,
+			 @FormParam("id_utilisateur") int id)
+			 {
+				daoFactory= new DAOFactory();
+		Commande commande = new Commande();
+		commande.setDateCommande(dateCommande);
+		commande.setEtat(etat);
+		Client client = new Client();
+		client.setId(id);
+		return Response.status(Status.OK).entity(daoCommande.create(commande, client)).build();	
+	}*/
+	
+	@POST
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response PostLigneCom(
+			@FormParam("id_commande") int id_commande,
+			@FormParam("id_article") int id_article)
+			 {
+				daoFactory= new DAOFactory();
+		Commande commande = new Commande();
+		commande.setId(id_commande);
+		Article article = new Article();
+		article.setId(id_article);
+		return Response.status(Status.OK).entity(daoCommande.createLigneCommande(commande, article)).build();	
+	}
+	
+	
 	
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
