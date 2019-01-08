@@ -127,6 +127,7 @@ public class DAOVendeur extends Idao<Vendeur> {
 		}
 		return listVendeurs;
 	}
+	
 	@Override
 	public boolean delete(Vendeur obj) {
 		// TODO Auto-generated method stub

@@ -117,7 +117,7 @@ public class REST_Commande {
 		return Response.status(Status.OK).entity(dao_com.create(commande)).build();	
 	}*/
 	
-/*	@POST
+	/*@POST
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response PostCom(

@@ -4,8 +4,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import Bean.Client;
+import Bean.Vendeur;
 import oracle.jdbc.OracleTypes;
 
 public class DAOClient extends Idao<Client>{
@@ -97,6 +100,33 @@ public class DAOClient extends Idao<Client>{
 		return null;
 	}
 
+	public List<Client> findAll() {
+		Client client = null;
+		List<Client> listClients = new ArrayList<Client>();
+		try{
+			String sql = "{call PKG_UTILISATEUR.findAll(?)}"; 
+			CallableStatement call = connect.prepareCall(sql); 	
+			call.registerOutParameter(1, OracleTypes.CURSOR); 
+			call.execute();
+			ResultSet  result = (ResultSet)call.getObject(1);
+			while (result.next()){
+				client = new Client();
+				client.setId(result.getInt("ID_UTILISATEUR"));
+				client.setNom(result.getString("NOM"));
+				client.setPrenom(result.getString("PRENOM"));
+				client.setDateNaissance(result.getString("DATENAISSANCE"));	
+				client.setTelephone(result.getString("TELEPHONE"));	
+				client.setEmail(result.getString("EMAIL"));	
+				client.setPassword(result.getString("PASS"));	
+				listClients.add(client);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();  
+		}
+		return listClients;
+	}
+	
 	@Override
 	public boolean delete(Client obj) {
 		// TODO Auto-generated method stub
