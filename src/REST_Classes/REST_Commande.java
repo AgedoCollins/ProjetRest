@@ -116,8 +116,9 @@ public class REST_Commande {
 		commande.setClient(client);
 		return Response.status(Status.OK).entity(dao_com.create(commande)).build();	
 	}*/
-	@Path("ajoutercommande")
+	
 	@POST
+	@Path("ajoutercommande")
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response PostCom(
