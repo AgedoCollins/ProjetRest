@@ -9,6 +9,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -75,8 +76,8 @@ public class REST_Client {
 		return Response.status(Status.OK).entity(dao_client.create(client)).build();
 	}
 	
-	@Path("Update")
-	@POST
+	@PUT
+	@Path("update")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response UpdateClient(
@@ -109,7 +110,6 @@ public class REST_Client {
 			return Response.status(Status.OK).entity("-1").build();
 			
 	}
-	
 	
 	@DELETE
 	@Produces(MediaType.TEXT_PLAIN)

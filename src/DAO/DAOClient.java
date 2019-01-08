@@ -71,7 +71,7 @@ public class DAOClient extends Idao<Client>{
 		return res;
 	}
 	
-	public boolean update(Client cli) {
+public boolean update(Client cli) {
 		
 		
 		String sql = "{call PKG_Utilisateur.updateUtilisateur(?,?,?,?,?,?,?)}"; 

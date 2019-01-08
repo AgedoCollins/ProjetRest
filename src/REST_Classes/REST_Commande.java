@@ -45,12 +45,12 @@ public class REST_Commande {
 	@GET
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCommande() {
+	public Response getCommandeVendeur(@QueryParam("id") String id) {
 		daoFactory= new DAOFactory();
-		DAOCommande daoCommande = (DAOCommande) daoFactory.getDaoCommande();
-		List<Commande> listCommandes = daoCommande.findAll();
-		if(listCommandes.size()>0)
-			return Response.status(Status.OK).entity(listCommandes).build();
+		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
+		List<Article> listArticles = daoArticle.findByIdVendeur(id);
+		if(listArticles.size()>0)
+			return Response.status(Status.OK).entity(listArticles).build();
 		else
 			return Response.status(Status.OK).build();		
 			
@@ -116,51 +116,48 @@ public class REST_Commande {
 		commande.setClient(client);
 		return Response.status(Status.OK).entity(dao_com.create(commande)).build();	
 	}*/
-	
-	/*@POST
+	@Path("ajoutercommande")
+	@POST
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response PostCom(
 			@FormParam("dateCommande") String dateCommande,
-			@FormParam("etat") String etat,
 			 @FormParam("id_utilisateur") int id)
 			 {
 				daoFactory= new DAOFactory();
 		Commande commande = new Commande();
 		commande.setDateCommande(dateCommande);
-		commande.setEtat(etat);
 		Client client = new Client();
 		client.setId(id);
 		return Response.status(Status.OK).entity(daoCommande.create(commande, client)).build();	
-	}*/
+	}
 	
 	@POST
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response PostLigneCom(
 			@FormParam("id_commande") int id_commande,
-			@FormParam("id_article") int id_article)
+			@FormParam("id_article") int id_article,
+			@FormParam("quantite") int quantite)
 			 {
 				daoFactory= new DAOFactory();
 		Commande commande = new Commande();
 		commande.setId(id_commande);
 		Article article = new Article();
 		article.setId(id_article);
-		return Response.status(Status.OK).entity(daoCommande.createLigneCommande(commande, article)).build();	
+		return Response.status(Status.OK).entity(daoCommande.createLigneCommande(commande, article, quantite)).build();	
 	}
 	
 	
 	
 	@PUT
-	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response updateCommande(
-				@FormParam("id_commande") int id_commande,
-				@FormParam("etat") String etat) {
-		Commande com = new Commande();
-		com.setId(id_commande);
-		com.setEtat(etat);
-		if(daoCommande.updateTraite(com))
+				@FormParam("id_article") int id_article) {
+		Article art = new Article();
+		art.setId(id_article);
+		if(daoCommande.updateTraite(art))
 			return Response.status(Status.OK).entity("ok").build();	
 		else
 			return Response.status(Status.OK).entity("ko").build();	

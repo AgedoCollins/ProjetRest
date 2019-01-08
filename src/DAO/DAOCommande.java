@@ -26,12 +26,10 @@ public class DAOCommande extends Idao<Commande>{
 	public String create(Commande commande, Client client) {
 		String res="";
 		try{
-			String sql = "{call PKG_COMMANDE.createCommande(?,?,?)}"; 
+			String sql = "{call PKG_COMMANDE.createCommande(?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 				
 			call.setString(1, commande.getDateCommande());
-			call.setString(2, commande.getEtat());
-			call.setInt(3, client.getId());
-			//call.setString(5, "11".toString());
+			call.setInt(2, client.getId());
 			call.execute();
 			res = "1";
 
@@ -44,15 +42,14 @@ public class DAOCommande extends Idao<Commande>{
 	}
 	
 
-	public String createLigneCommande(Commande commande, Article article) {
+	public String createLigneCommande(Commande commande, Article article, int quantite) {
 		String res="";
 		try{
 			String sql = "{call PKG_COMMANDE.createLigneCommande(?,?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 				
 			call.setInt(1, commande.getId());
 			call.setInt(2, article.getId());
-			call.setInt(3, 1);
-			//call.setString(5, "11".toString());
+			call.setInt(3, quantite);
 			call.execute();
 			res = "1";
 
@@ -80,8 +77,6 @@ public class DAOCommande extends Idao<Commande>{
 				commande = new Commande();
 				commande.setId(result.getInt("id"));
 				commande.setDateCommande(result.getString("dateCommande"));
-				commande.setEtat(result.getString("etat"));	
-				//commande.setDateLivraison(result.getDate("dateLivraison"));
 			}
 		}
 		catch (Exception e){
@@ -103,8 +98,6 @@ public class DAOCommande extends Idao<Commande>{
 				commande = new Commande();
 				commande.setId(result.getInt("ID_COMMANDE"));
 				commande.setDateCommande(result.getString("DATECOMMANDE"));
-				commande.setEtat(result.getString("ETAT"));
-				//commande.setDateLivraison(result.getDate("DATELIVRAISON"));
 				listCommandes.add(commande);
 			}
 		}
@@ -127,8 +120,6 @@ public class DAOCommande extends Idao<Commande>{
 				commande = new Commande();
 				commande.setId(result.getInt("ID_COMMANDE"));
 				commande.setDateCommande(result.getString("DATECOMMANDE"));
-				commande.setEtat(result.getString("ETAT"));
-				//commande.setDateLivraison(result.getDate("DATELIVRAISON"));
 				listCommandes.add(commande);
 			}
 		}
@@ -153,8 +144,6 @@ public class DAOCommande extends Idao<Commande>{
 				commande = new Commande();
 				commande.setId(result.getInt("ID_COMMANDE"));
 				commande.setDateCommande(result.getString("DATECOMMANDE"));
-				commande.setEtat(result.getString("ETAT"));
-				//commande.setDateLivraison(result.getDate("DATELIVRAISON"));
 				listCommandes.add(commande);
 			}
 		}
@@ -176,14 +165,13 @@ public class DAOCommande extends Idao<Commande>{
 		return false;
 	}
 	
-	public boolean updateTraite(Commande commande) {
+	public boolean updateTraite(Article article) {
 		boolean res = false;
 		try{
-			String sql = "{call PKG_COMMANDE.updateCommande(?,?,?)}"; 
+			String sql = "{call PKG_COMMANDE.updateEtatArticle(?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 	
-			call.setInt(1, commande.getId());
-			call.setString(2, commande.getDateCommande());
-			call.setString(3, "TRAITEE");
+			call.setInt(1, article.getId());
+			call.setString(2, "TRAITEE");
 			call.execute();
 			res = true;
 

@@ -54,7 +54,7 @@ public class REST_Article {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getArticleByVendeur(@PathParam("id") int id) {
+	public Response getArticleByVendeur(@PathParam("id") String id) {
 		daoFactory= new DAOFactory();
 		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
 		List<Article> listArticles = daoArticle.findByIdVendeur(id);	

@@ -90,13 +90,15 @@ public class DAOArticle extends Idao<Article>{
 		return article;
 	}
 	
-	public List<Article> findByIdVendeur(int id) {
+	public List<Article> findByIdVendeur(String id) {
 		Article article = null;
+		int id_vendeur = Integer.parseInt(id);
+		
 		List<Article> listArticles = new ArrayList<Article>();
 		try{
-			String sql = "{call PKG_ARTICLE.findItemsVendor(?,?)}"; 
+			String sql = "{call PKG_ARTICLE.findItemsVendu(?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 	
-			call.setInt(1, id); 
+			call.setInt(1, id_vendeur); 
 			call.registerOutParameter(2, OracleTypes.CURSOR); 
 			call.execute();
 			ResultSet  result = (ResultSet)call.getObject(2);
