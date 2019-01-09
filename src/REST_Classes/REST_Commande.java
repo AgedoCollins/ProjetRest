@@ -48,7 +48,7 @@ public class REST_Commande {
 	public Response getCommandeVendeur(@QueryParam("id") String id) {
 		daoFactory= new DAOFactory();
 		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
-		List<Article> listArticles = daoArticle.findByIdVendeur(id);
+		List<Article> listArticles = daoArticle.findArticleInCommandeByIdVendeur(id);
 		if(listArticles.size()>0)
 			return Response.status(Status.OK).entity(listArticles).build();
 		else

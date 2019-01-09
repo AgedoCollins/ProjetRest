@@ -96,6 +96,34 @@ public class DAOArticle extends Idao<Article>{
 		
 		List<Article> listArticles = new ArrayList<Article>();
 		try{
+			String sql = "{call PKG_ARTICLE.findItemsVendor(?,?)}"; 
+			CallableStatement call = connect.prepareCall(sql); 	
+			call.setInt(1, id_vendeur); 
+			call.registerOutParameter(2, OracleTypes.CURSOR); 
+			call.execute();
+			ResultSet  result = (ResultSet)call.getObject(2);
+			while (result.next()){
+				article = new Article();
+				article.setId(result.getInt("ID_ARTICLE"));
+				article.setLibelle(result.getString("LIBELLE"));
+				article.setPrix(result.getDouble("PRIX"));
+				article.setDescriptif(result.getString("DESCRIPTION_ARTICLE"));	
+				article.setNomImage(result.getString("NOMIMAGE"));	
+				listArticles.add(article);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();  
+		}
+		return listArticles;
+	}
+	
+	public List<Article> findArticleInCommandeByIdVendeur(String id) {
+		Article article = null;
+		int id_vendeur = Integer.parseInt(id);
+		
+		List<Article> listArticles = new ArrayList<Article>();
+		try{
 			String sql = "{call PKG_ARTICLE.findItemsVendu(?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 	
 			call.setInt(1, id_vendeur); 
