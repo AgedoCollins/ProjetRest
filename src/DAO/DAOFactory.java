@@ -13,31 +13,31 @@ import Bean.Vendeur;
 public class DAOFactory {
 	protected static final Connection conn = ConnectDB.getConnection();
 
-	public Idao<Utilisateur> getDaoUtilisateur() {
+	public DAO<Utilisateur> getDaoUtilisateur() {
 		return new DAOUtilisateur(conn);
 	}
 
-	public Idao<Vendeur> getDaoVendeur() {
+	public DAO<Vendeur> getDaoVendeur() {
 		return new DAOVendeur(conn);
 	}
 	
-	public Idao<Client> getDaoClient() {
+	public DAO<Client> getDaoClient() {
 		return new DAOClient(conn);
 	}
 
-	public Idao<Article> getDaoArticle() {
+	public DAO<Article> getDaoArticle() {
 		return new DAOArticle(conn);
 	}
 
-	public Idao<Commande> getDaoCommande() {
+	public DAO<Commande> getDaoCommande() {
 		return new DAOCommande(conn);
 	}
 	
-	public Idao<Panier> getDaoPanier() {
+	public DAO<Panier> getDaoPanier() {
 		return new DAOPanier(conn);
 	}
 	
-	public Idao<Catalogue> getDaoCatalogue() {
+	public DAO<Catalogue> getDaoCatalogue() {
 		return new DAOCatalogue(conn);
 	}
 }

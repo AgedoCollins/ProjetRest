@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import Bean.Utilisateur;
 import oracle.jdbc.OracleTypes;
 
-public class DAOUtilisateur extends Idao<Utilisateur>{
+public class DAOUtilisateur extends DAO<Utilisateur>{
 	public DAOUtilisateur(Connection conn) {
 		super(conn);
 	}
@@ -43,7 +43,6 @@ public class DAOUtilisateur extends Idao<Utilisateur>{
 	public String create(Utilisateur utilisateur) {
 		String res="";
 		try{
-			//if(login(utilisateur.getEmail(),utilisateur.getPassword())==null){
 				String sql = "{call PKG_Utilisateur.createUtilisateur(?,?,?,?,?,?)}"; 
 				CallableStatement call = connect.prepareCall(sql); 		
 				call.setString(1, utilisateur.getNom());
@@ -54,10 +53,6 @@ public class DAOUtilisateur extends Idao<Utilisateur>{
 				call.setString(6, utilisateur.getPassword());
 				call.execute();
 				res = "1";
-			/*}
-			else
-				res="0";*/
-
 		}
 		catch (Exception e){
 			res="-111";

@@ -10,7 +10,7 @@ import Bean.Article;
 import Bean.Vendeur;
 import oracle.jdbc.OracleTypes;
 
-public class DAOVendeur extends Idao<Vendeur> {
+public class DAOVendeur extends DAO<Vendeur> {
 	public DAOVendeur(Connection conn) {
 		super(conn);
 	}
@@ -47,7 +47,6 @@ public class DAOVendeur extends Idao<Vendeur> {
 	public String create(Vendeur vendeur) {
 		String res = "";
 		try {
-			// if(login(client.getEmail(),client.getPassword())==null){
 			String sql = "{call PKG_Utilisateur.createUtilisateur(?,?,?,?,?,?,?)}";
 			CallableStatement call = connect.prepareCall(sql);
 			call.setString(1, vendeur.getNom());
@@ -59,9 +58,6 @@ public class DAOVendeur extends Idao<Vendeur> {
 			call.setString(7, "vendeur");
 			call.execute();
 			res = "1";
-			/*
-			 * } else res="0";
-			 */
 		} catch (Exception e) {
 			res = "-111";
 		}

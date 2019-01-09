@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import Bean.Panier;
 
-public class DAOPanier extends Idao<Panier>{
+public class DAOPanier extends DAO<Panier>{
 	public DAOPanier(Connection conn) {
 		super(conn);
 	}

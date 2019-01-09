@@ -70,18 +70,5 @@ public class REST_Vendeur {
 		DAOVendeur daoVendeur = (DAOVendeur) daoFactory.getDaoVendeur();
 		return Response.status(Status.OK).entity(daoVendeur.create(vendeur)).build();
 	}
-	
-	
-	
-	@DELETE
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response deleteVendeur() {
-		
-		return Response.status(Status.OK).entity("mmmmmmmmmmmmmmm").build();
-	}
-	
-	
-	
-	
 }
 

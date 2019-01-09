@@ -60,6 +60,7 @@ public class Utilisateur {
 		this.nom = nom;
 	}
 
+	@XmlAttribute(name = "prenom")
 	public String getPrenom() {
 		return prenom;
 	}
@@ -68,6 +69,7 @@ public class Utilisateur {
 		this.prenom = prenom;
 	}
 
+	@XmlAttribute(name = "dateNaissance")
 	public String getDateNaissance() {
 		return dateNaissance;
 	}
@@ -76,6 +78,7 @@ public class Utilisateur {
 		this.dateNaissance = dateNaissance;
 	}
 
+	@XmlAttribute(name = "telephone")
 	public String getTelephone() {
 		return telephone;
 	}
@@ -84,6 +87,7 @@ public class Utilisateur {
 		this.telephone = telephone;
 	}
 
+	@XmlAttribute(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -92,6 +96,7 @@ public class Utilisateur {
 		this.email = email;
 	}
 
+	@XmlAttribute(name = "password")
 	public void setPassword(String password) {
 		this.password = password;
 	}

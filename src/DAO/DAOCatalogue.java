@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import Bean.Catalogue;
 
-public class DAOCatalogue extends Idao<Catalogue>{
+public class DAOCatalogue extends DAO<Catalogue>{
 	public DAOCatalogue(Connection conn) {
 		super(conn);
 	}

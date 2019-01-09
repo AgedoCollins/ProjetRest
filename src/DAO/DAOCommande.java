@@ -12,7 +12,7 @@ import Bean.Commande;
 import Bean.Vendeur;
 import oracle.jdbc.OracleTypes;
 
-public class DAOCommande extends Idao<Commande>{
+public class DAOCommande extends DAO<Commande>{
 	public DAOCommande(Connection conn) {
 		super(conn);
 	}

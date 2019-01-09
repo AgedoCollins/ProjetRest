@@ -110,16 +110,5 @@ public class REST_Client {
 			return Response.status(Status.OK).entity("-1").build();
 			
 	}
-	
-	@DELETE
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response deleteClient() {
-		
-		return Response.status(Status.OK).entity("mmmmmmmmmmmmmmm").build();
-	}
-	
-	
-	
-	
 }
 
