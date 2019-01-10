@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -23,6 +24,20 @@ import DAO.DAOFactory;
 @Path("articles")
 public class REST_Article {
 	private DAOFactory daoFactory= null;
+	
+	@GET
+	@Path("all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommandeVendeur(@QueryParam("id") String id) {
+		daoFactory = new DAOFactory();
+		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
+		List<Article> listArticles = daoArticle.findArticleInCommandeByIdVendeur(id);
+		if (listArticles.size() > 0)
+			return Response.status(Status.OK).entity(listArticles).build();
+		else
+			return Response.status(Status.OK).build();
+
+	}
 	
 	@GET
 	@Path("afficher/{id}")

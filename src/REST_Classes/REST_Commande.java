@@ -28,20 +28,6 @@ public class REST_Commande {
 	private DAOCommande daoCommande = (DAOCommande) daoFactory.getDaoCommande();
 
 	@GET
-	@Path("all")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCommandeVendeur(@QueryParam("id") String id) {
-		daoFactory = new DAOFactory();
-		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
-		List<Article> listArticles = daoArticle.findArticleInCommandeByIdVendeur(id);
-		if (listArticles.size() > 0)
-			return Response.status(Status.OK).entity(listArticles).build();
-		else
-			return Response.status(Status.OK).build();
-
-	}
-
-	@GET
 	@Path("lastId")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommandeForLastId() {
