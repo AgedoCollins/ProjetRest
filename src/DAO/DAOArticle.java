@@ -119,6 +119,7 @@ public class DAOArticle extends DAO<Article>{
 				article.setPrix(result.getDouble("PRIX"));
 				article.setDescriptif(result.getString("DESCRIPTION_ARTICLE"));	
 				article.setNomImage(result.getString("NOMIMAGE"));	
+				article.setId_commande(result.getInt("ID_COMMANDE"));
 				listArticles.add(article);
 			}
 		}

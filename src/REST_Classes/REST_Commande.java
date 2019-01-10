@@ -1,6 +1,5 @@
 package REST_Classes;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -109,9 +108,10 @@ public class REST_Commande {
 	@PUT
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response updateCommande(@FormParam("id_article") int id_article) {
+	public Response updateCommande(@FormParam("id_article") int id_article, @FormParam("id_commande") int id_commande) {
 		Article art = new Article();
 		art.setId(id_article);
+		art.setId_commande(id_commande);
 		if (daoCommande.updateTraite(art))
 			return Response.status(Status.OK).entity("ok").build();
 		else

@@ -5,14 +5,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "article")
-@XmlType(propOrder = { "libelle", "prix", "descriptif", "nomImage"})
+@XmlType(propOrder = { "libelle", "prix", "descriptif", "nomImage", "id_commande"})
 public class Article {
 	private int id;
 	private String libelle;
 	private double prix;
 	private String descriptif;
 	private String nomImage;
-
+	private int id_commande;
+	
 	public Article() {
 
 	}
@@ -76,5 +77,16 @@ public class Article {
 	public void setNomImage(String nomImage) {
 		this.nomImage = nomImage;
 	}
+
+	@XmlAttribute(name = "id_commande")
+	public int getId_commande() {
+		return id_commande;
+	}
+
+	public void setId_commande(int id_commande) {
+		this.id_commande = id_commande;
+	}
+	
+	
 
 }

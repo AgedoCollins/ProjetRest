@@ -9,7 +9,6 @@ import java.util.List;
 import Bean.Article;
 import Bean.Client;
 import Bean.Commande;
-import Bean.Vendeur;
 import oracle.jdbc.OracleTypes;
 
 public class DAOCommande extends DAO<Commande>{
@@ -144,6 +143,7 @@ public class DAOCommande extends DAO<Commande>{
 				commande = new Commande();
 				commande.setId(result.getInt("ID_COMMANDE"));
 				commande.setDateCommande(result.getString("DATECOMMANDE"));
+				commande.setEtat(result.getString("ETAT"));
 				listCommandes.add(commande);
 			}
 		}
@@ -168,10 +168,11 @@ public class DAOCommande extends DAO<Commande>{
 	public boolean updateTraite(Article article) {
 		boolean res = false;
 		try{
-			String sql = "{call PKG_COMMANDE.updateEtatArticle(?,?)}"; 
+			String sql = "{call PKG_COMMANDE.updateEtatArticle(?,?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 	
 			call.setInt(1, article.getId());
 			call.setString(2, "TRAITEE");
+			call.setInt(3, article.getId_commande());
 			call.execute();
 			res = true;
 

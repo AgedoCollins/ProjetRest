@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Bean.Client;
-import Bean.Vendeur;
 import oracle.jdbc.OracleTypes;
 
 public class DAOClient extends DAO<Client> {

@@ -1,11 +1,9 @@
 package REST_Classes;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,11 +16,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import Bean.Client;
-import Bean.Vendeur;
 import DAO.DAOClient;
 import DAO.DAOFactory;
-import DAO.DAOUtilisateur;
-import DAO.DAOVendeur;
 
 @Path("clients")
 public class REST_Client {

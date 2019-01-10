@@ -1,27 +1,26 @@
 package Bean;
 
-import java.sql.Date;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "commande")
-@XmlType(propOrder = { "id", "dateCommande"})
+@XmlType(propOrder = { "id", "dateCommande", "etat" })
 public class Commande {
 	private int id;
 	private String dateCommande;
+	private String etat;
 
 	public Commande() {
 
 	}
 
-	public Commande(int id, String dateCommande) {
+	public Commande(int id, String dateCommande, String etat) {
 		this.id = id;
 		this.dateCommande = dateCommande;
 	}
 
-	public Commande(String dateCommande) {
+	public Commande(String dateCommande, String etat) {
 		this.dateCommande = dateCommande;
 	}
 
@@ -42,4 +41,14 @@ public class Commande {
 	public void setDateCommande(String dateCommande) {
 		this.dateCommande = dateCommande;
 	}
+
+	@XmlAttribute(name = "etat")
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
 }
