@@ -102,7 +102,7 @@ public class REST_Client {
 		else {
 			
 		}
-			return Response.status(Status.OK).entity("-1").build();
+			return Response.status(Status.OK).entity("Le client a bien été modifié.").build();
 			
 	}
 }

@@ -62,7 +62,7 @@ public class REST_Article {
 		if(listArticles.size()>0)
 			return Response.status(Status.OK).entity(listArticles).build();
 		else
-			return Response.status(Status.OK).entity(null).build();		
+			return Response.status(Status.OK).build();		
 			
 	}
 	
@@ -76,7 +76,7 @@ public class REST_Article {
 		if(listArticles.size()>0)
 			return Response.status(Status.OK).entity(listArticles).build();
 		else
-			return Response.status(Status.OK).entity(null).build();		
+			return Response.status(Status.OK).build();		
 			
 	}
 	
@@ -132,9 +132,9 @@ public class REST_Article {
 		Article article = new Article();
 		article.setId(Integer.parseInt(id));
 		if(daoArticle.delete(article))
-			return Response.status(Status.OK).entity("ok").build();
+			return Response.status(Status.OK).entity("L'article " + article.getId() + "a bien été supprimé.").build();
 		else
-			return Response.status(Status.OK).entity("ko").build();
+			return Response.status(Status.OK).entity("L'article n'a pas été supprimé.").build();
 	}
 	
 }
