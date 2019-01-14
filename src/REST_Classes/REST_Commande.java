@@ -50,21 +50,7 @@ public class REST_Commande {
 		else
 			return Response.status(Status.OK).build();
 	}
-
-	@GET
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getArticleByCommande(@PathParam("id") int id) {
-		daoFactory = new DAOFactory();
-		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
-		List<Article> listArticles = daoArticle.findByIdCommande(id);
-		if (listArticles.size() > 0)
-			return Response.status(Status.OK).entity(listArticles).build();
-		else
-			return Response.status(Status.OK).build();
-
-	}
-
+	
 	@POST
 	@Path("ajoutercommande")
 	@Consumes("application/x-www-form-urlencoded")
@@ -99,8 +85,8 @@ public class REST_Commande {
 		art.setId(id_article);
 		art.setId_commande(id_commande);
 		if (daoCommande.updateTraite(art))
-			return Response.status(Status.OK).entity("La commande a bien été modifiée.").build();
+			return Response.status(Status.OK).entity("ok").build();
 		else
-			return Response.status(Status.OK).entity("La commande n'a pas été modifiée.").build();
+			return Response.status(Status.OK).entity("ko").build();
 	}
 }

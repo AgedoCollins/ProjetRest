@@ -76,8 +76,22 @@ public class REST_Article {
 		if(listArticles.size()>0)
 			return Response.status(Status.OK).entity(listArticles).build();
 		else
-			return Response.status(Status.OK).build();		
+			return Response.status(Status.OK).entity(null).build();		
 			
+	}
+	
+	@GET
+	@Path("commandes/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getArticleByCommande(@PathParam("id") int id) {
+		daoFactory = new DAOFactory();
+		DAOArticle daoArticle = (DAOArticle) daoFactory.getDaoArticle();
+		List<Article> listArticles = daoArticle.findByIdCommande(id);
+		if (listArticles.size() > 0)
+			return Response.status(Status.OK).entity(listArticles).build();
+		else
+			return Response.status(Status.OK).build();
+
 	}
 	
 	@POST
@@ -132,9 +146,9 @@ public class REST_Article {
 		Article article = new Article();
 		article.setId(Integer.parseInt(id));
 		if(daoArticle.delete(article))
-			return Response.status(Status.OK).entity("L'article " + article.getId() + "a bien été supprimé.").build();
+			return Response.status(Status.OK).entity("ok").build();
 		else
-			return Response.status(Status.OK).entity("L'article n'a pas été supprimé.").build();
+			return Response.status(Status.OK).entity("ko").build();
 	}
 	
 }
