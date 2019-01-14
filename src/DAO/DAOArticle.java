@@ -200,22 +200,7 @@ public class DAOArticle extends DAO<Article>{
 
 	@Override
 	public boolean update(Article article) {
-		boolean res=false;
-		try{
-			String sql = "{call PKG_ARTICLE.updateArticle(?,?,?,?)}"; 
-			CallableStatement call = connect.prepareCall(sql); 	
-			call.setInt(1, article.getId());
-			call.setString(2, article.getLibelle());
-			call.setDouble(3, article.getPrix());
-			call.setString(4, article.getDescriptif());
-			call.execute();
-			res = true;
-
-		}
-		catch (Exception e){
-			res=false;
-		}
-		return res;
+		return false;
 	}
 	
 	public String updateArticle(Article article) {

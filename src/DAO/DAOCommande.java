@@ -62,48 +62,7 @@ public class DAOCommande extends DAO<Commande>{
 
 	@Override
 	public Commande find(Commande commande) {
-		@SuppressWarnings("unused")
-		Commande comm = null;
-		try{
-			String sql = "{call PKG_COMMANDE.findById(?,?)}"; 
-			CallableStatement call = connect.prepareCall(sql); 		
-			call.setInt(1, commande.getId());
-			call.registerOutParameter(2, OracleTypes.CURSOR); 
-			call.execute();
-			ResultSet  result = (ResultSet)call.getObject(2);
-			while(result.next()){
-				// information sur la commande
-				commande = new Commande();
-				commande.setId(result.getInt("id"));
-				commande.setDateCommande(result.getString("dateCommande"));
-			}
-		}
-		catch (Exception e){
-			e.printStackTrace();  
-		}
 		return commande;
-	}
-	
-	public List<Commande> findAll() {
-		Commande commande = null;
-		List<Commande> listCommandes = new ArrayList<>();
-		try{
-			String sql = "{call PKG_COMMANDE.FINDALL(?)}"; 
-			CallableStatement call = connect.prepareCall(sql); 	
-			call.registerOutParameter(1, OracleTypes.CURSOR); 
-			call.execute();
-			ResultSet  result = (ResultSet)call.getObject(1);
-			while (result.next()){
-				commande = new Commande();
-				commande.setId(result.getInt("ID_COMMANDE"));
-				commande.setDateCommande(result.getString("DATECOMMANDE"));
-				listCommandes.add(commande);
-			}
-		}
-		catch (Exception e){
-			e.printStackTrace();  
-		}
-		return listCommandes;
 	}
 	
 	public List<Commande> findAllForLastId() {

@@ -42,22 +42,6 @@ public class DAOUtilisateur extends DAO<Utilisateur>{
 	@Override
 	public String create(Utilisateur utilisateur) {
 		String res="";
-		try{
-				String sql = "{call PKG_Utilisateur.createUtilisateur(?,?,?,?,?,?)}"; 
-				CallableStatement call = connect.prepareCall(sql); 		
-				call.setString(1, utilisateur.getNom());
-				call.setString(2, utilisateur.getPrenom());
-				call.setString(3, utilisateur.getDateNaissance());
-				call.setString(4, utilisateur.getTelephone());
-				call.setString(5, utilisateur.getEmail());
-				call.setString(6, utilisateur.getPassword());
-				call.execute();
-				res = "1";
-		}
-		catch (Exception e){
-			res="-111";
-			//res=e.getMessage();
-		}
 		return res;
 	}
 

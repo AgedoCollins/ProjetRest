@@ -70,33 +70,6 @@ public class DAOVendeur extends DAO<Vendeur> {
 		return null;
 	}
 
-	public List<Article> findArticlesByVendeur(Vendeur vendeur) {
-		Article article = null;
-		List<Article> listArticles = new ArrayList<Article>();
-		try{
-			String sql = "{call PKG_ARTICLE.findItemsVendor(?,?)}"; 
-			CallableStatement call = connect.prepareCall(sql); 	
-			call.setInt(1, vendeur.getId()); 
-			call.registerOutParameter(2, OracleTypes.CURSOR); 
-			call.execute();
-			ResultSet  result = (ResultSet)call.getObject(2);
-			while (result.next()){
-				article = new Article();
-				article.setId(result.getInt("ID_ARTICLE"));
-				article.setLibelle(result.getString("LIBELLE"));
-				article.setPrix(result.getDouble("PRIX"));
-				article.setDescriptif(result.getString("DESCRIPTION_ARTICLE"));	
-				article.setNomImage(result.getString("NOMIMAGE"));	
-				listArticles.add(article);
-			}
-			vendeur.setListArticles(listArticles);
-		}
-		catch (Exception e){
-			e.printStackTrace();  
-		}
-		return listArticles;
-	}
-
 	public List<Vendeur> findAll() {
 		Vendeur vendeur = null;
 		List<Vendeur> listVendeurs = new ArrayList<Vendeur>();
