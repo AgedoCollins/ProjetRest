@@ -120,6 +120,7 @@ public class DAOArticle extends DAO<Article>{
 				article.setDescriptif(result.getString("DESCRIPTION_ARTICLE"));	
 				article.setNomImage(result.getString("NOMIMAGE"));	
 				article.setId_commande(result.getInt("ID_COMMANDE"));
+				article.setEtat(result.getString("ETAT_ARTICLEVENDEUR"));
 				listArticles.add(article);
 			}
 		}
@@ -146,6 +147,7 @@ public class DAOArticle extends DAO<Article>{
 				article.setPrix(result.getDouble("PRIX"));
 				article.setDescriptif(result.getString("DESCRIPTION_ARTICLE"));	
 				article.setNomImage(result.getString("NOMIMAGE"));	
+				article.setEtat(result.getString("ETAT_ARTICLEVENDEUR"));
 				listArticles.add(article);
 			}
 		}

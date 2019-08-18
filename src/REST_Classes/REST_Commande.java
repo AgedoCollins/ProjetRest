@@ -55,10 +55,11 @@ public class REST_Commande {
 	@Path("ajoutercommande")
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response PostCom(@FormParam("dateCommande") String dateCommande, @FormParam("id_utilisateur") int id) {
+	public Response PostCom(@FormParam("dateCommande") String dateCommande, @FormParam("id_utilisateur") int id,@FormParam("prix_Totale") double prixTotale) {
 		daoFactory = new DAOFactory();
 		Commande commande = new Commande();
 		commande.setDateCommande(dateCommande);
+		commande.setPrixTotale(prixTotale);
 		Client client = new Client();
 		client.setId(id);
 		return Response.status(Status.OK).entity(daoCommande.create(commande, client)).build();

@@ -25,10 +25,11 @@ public class DAOCommande extends DAO<Commande>{
 	public String create(Commande commande, Client client) {
 		String res="";
 		try{
-			String sql = "{call PKG_COMMANDE.createCommande(?,?)}"; 
+			String sql = "{call PKG_COMMANDE.createCommande(?,?,?)}"; 
 			CallableStatement call = connect.prepareCall(sql); 				
 			call.setString(1, commande.getDateCommande());
 			call.setInt(2, client.getId());
+			call.setDouble(3, commande.getPrixTotale());
 			call.execute();
 			res = "1";
 
@@ -103,6 +104,7 @@ public class DAOCommande extends DAO<Commande>{
 				commande.setId(result.getInt("ID_COMMANDE"));
 				commande.setDateCommande(result.getString("DATECOMMANDE"));
 				commande.setEtat(result.getString("ETAT"));
+				commande.setPrixTotale(result.getDouble("PRIXTOTALE"));
 				listCommandes.add(commande);
 			}
 		}

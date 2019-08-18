@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "article")
-@XmlType(propOrder = { "libelle", "prix", "descriptif", "nomImage", "id_commande"})
+@XmlType(propOrder = { "libelle", "prix", "descriptif", "nomImage", "id_commande","etat"})
 public class Article {
 	private int id;
 	private String libelle;
@@ -13,24 +13,27 @@ public class Article {
 	private String descriptif;
 	private String nomImage;
 	private int id_commande;
+	private String etat;
 	
 	public Article() {
 
 	}
 
-	public Article(int id, String libelle, double prix, String descriptif, String nomImage) {
+	public Article(int id, String libelle, double prix, String descriptif, String nomImage, String etat) {
 		this.id=id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.descriptif = descriptif;
 		this.nomImage = nomImage;
+		this.etat = etat;
 	}
 	
-	public Article(String libelle, double prix, String descriptif, String nomImage) {
+	public Article(String libelle, double prix, String descriptif, String nomImage, String etat) {
 		this.libelle = libelle;
 		this.prix = prix;
 		this.descriptif = descriptif;
 		this.nomImage = nomImage;
+		this.etat = etat;
 	}
 
 	@XmlAttribute(name = "id")
@@ -87,6 +90,13 @@ public class Article {
 		this.id_commande = id_commande;
 	}
 	
-	
+	@XmlAttribute(name = "etat")
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
 
 }
